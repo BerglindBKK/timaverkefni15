@@ -4,12 +4,15 @@ import Link from "next/link";
 
 const Home = () => {
 	return (
-		<div className="p-20">
-			<p>Welcome to the Home page</p>
-			<Link className="border border-red-500" href={"/blog"}>
-				Go to blog
+		<div className="flex items-center justify-center bg-green-200 h-screen m-8">
+			<Link
+				href={"/blog"} >
+				<p className="text-3xl text-center">Welcome to Shrek's World!</p>
+				<p className="text-sm text-center">Feel free to walk around the swamp!</p>
 			</Link>
+
 		</div>
+
 	);
 };
 

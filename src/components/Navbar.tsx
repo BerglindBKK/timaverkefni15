@@ -6,30 +6,38 @@ const NavBar = () => {
 	const pathname = usePathname();
 	console.log({ pathname });
 
-	const isBlog = pathname.includes("blog");
+	// ensures you're only targeting URLs that are actually part of your blog section
+	const isBlog = pathname.startsWith("/blog");
 
 	return (
 		<nav>
-			<ol className="flex justify-around border border-red-500">
-				<li>
-					<Link
-						className="border border-cyan-700"
-						href="/"
-						style={pathname === "/" ? { backgroundColor: "red" } : {}}
-					>
-						Home
-					</Link>
-				</li>
-				<li>
-					<Link
-						className="border border-cyan-700 "
-						style={pathname.includes("/blog") ? { backgroundColor: "red" } : {}}
-						href="/blog"
-					>
-						Blog
-					</Link>
-				</li>
-			</ol>
+			<div className="flex justify-between bg-green-700 p-4">
+				<div className="text-white font-bold">
+					Shreks world
+				</div>
+				<div className="flex ">
+					<ol className=" flex gap-4">
+						<li>
+							<Link
+								className="text-white "
+								href="/"
+							// style={pathname === "/" ? { backgroundColor: "red" } : {}}
+							>
+								Home
+							</Link>
+						</li>
+						<li>
+							<Link
+								className="text-white "
+								// style={pathname.includes("/blog") ? { backgroundColor: "red" } : {}}
+								href="/blog"
+							>
+								Characters
+							</Link>
+						</li>
+					</ol>
+				</div>
+			</div>
 		</nav>
 	);
 };
