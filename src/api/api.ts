@@ -1,5 +1,3 @@
-import type { Expense } from "@/types/types";
-
 
 const users = [
 	{

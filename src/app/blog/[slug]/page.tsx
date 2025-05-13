@@ -1,31 +1,24 @@
 "use client";
 
-// Importing necessary modules and types
 import { fakeGetUserFunction, type User } from "@/api/api";
 import Link from "next/link";
-import { useSearchParams, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 const BlogWithInfo = () => {
-	// State to hold the fetched user data
 	const [user, setUser] = useState<User | null>(null);
-
-	// State to handle any potential error messages
 	const [error, setError] = useState<string | null>(null);
-
-	// Hook to get query parameters (currently unused in this component)
-	const queryParams = useSearchParams();
 
 	// Hook to get route parameters
 	const params = useParams();
 
-	// Extracting the slug from route parameters
+	// Extracting the slug from route parameters if it's a string only
 	const slug = typeof params.slug === "string" ? params.slug : undefined;
 
-	// Function to fetch user data, memoized to avoid unnecessary re-renders
+	// Function to fetch user data, memoized with useCallback to avoid unnecessary re-renders. 
+	// Callback notað því utan useEffect. Breytist bara ef slug breytist
 	const getUser = useCallback(async () => {
 		if (!slug) {
-			// If slug is missing, set an error
 			setError("Missing slug.");
 			return;
 		}
@@ -66,7 +59,8 @@ const BlogWithInfo = () => {
 
 			{/* Link to the "about" page with user's name as a query parameter.
 			    Also displays the user's avatar inside the link. */}
-			<Link href={`/about?blog=${user.name}`}>
+
+			<Link href={`/about?blog=${user.name}`}>{/* Þetta triggerar nýtt blog value fyrir QueryParams og blogName  */}
 				<img
 					src={user.avatar}
 					className="items-center text-center mx-auto p-8"
